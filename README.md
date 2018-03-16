@@ -1,3 +1,3 @@
 # MozoJava
 
-If you want to see my projects, please switch on my branchs. :D
+If you want to see my projects, please see my branches. :D
