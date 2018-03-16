@@ -5,6 +5,8 @@
  */
 package tp.n1.nicolas.mozo.classes;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,15 +18,20 @@ public class BeerProducter implements Runnable{
     // Attributes
     private final BeerHouse tBeerHouse;
     private final int iProductorID;
-    private final int WAITINGTIME = 1500;
+    private ArrayList<String> arrStringAvailableBeers;
+    private Random tRandomNumber = new Random();
+    private final int WAITINGTIME = 0;
+    private final int MAXBEERPERROUND = 5;
     /**
      * BeerProducter's Constructor
      * @param ptBeerHouse
      * @param idProductor 
+     * @param arrStringAvailableBeers 
      */
-    public BeerProducter(BeerHouse ptBeerHouse, int idProductor) {
+    public BeerProducter(BeerHouse ptBeerHouse, int idProductor, ArrayList<String> arrStringAvailableBeers) {
         this.tBeerHouse = ptBeerHouse;
         this.iProductorID = idProductor;
+        this.arrStringAvailableBeers = arrStringAvailableBeers;
     }   
     /**
      * Override the run method that implements from the Runnable's Interface
@@ -35,8 +42,15 @@ public class BeerProducter implements Runnable{
         while(true){
             // Try to make something magic
             try {
-                // Put a beer
-                System.out.println("El productor agrego una birrita.");
+                // Insert beer depending of how many beers can put in a round
+                for (int i = 0; i < this.MAXBEERPERROUND; i++) {                    
+                    // Get a random number between the size of the array and 0
+                    int iRandomPos = this.tRandomNumber.nextInt(this.arrStringAvailableBeers.size());
+                    // Put a beer using the random position
+                    this.tBeerHouse.putBeer(this.arrStringAvailableBeers.get(iRandomPos));
+                    // An animation message
+                    System.out.println("El productor agrego una birrita.");
+                }
                 // Wait a second please..
                 Thread.sleep(WAITINGTIME);
             // If some erros ocurrs (I don't belive it, because this code is amazing and programmed by me)

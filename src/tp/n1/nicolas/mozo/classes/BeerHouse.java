@@ -5,37 +5,42 @@
  */
 package tp.n1.nicolas.mozo.classes;
 
+import java.util.Stack;
 /**
  *
  * @author Mozo
  */
 public class BeerHouse {
     // Specify the counter of beers that are inside the container
-    private int iBeers = 100;    
+    private Stack<String> stkStrBeers = new Stack<String>();    
     /**
      * This method allows me to add a new/plus one element to the container
+     * @param strBeer
      * @throws InterruptedException 
      */
-    public synchronized void putBeer() throws InterruptedException{
+    public synchronized void putBeer(String strBeer) throws InterruptedException{
         // If the container is full
-        while(this.iBeers > 100){
+        while(this.stkStrBeers.size() > 100){
             // Sleep the thread
             wait();
         }
-        // Plus one to the container's counter
-        this.iBeers = this.iBeers + 1;
+        // Push the beer to the Stack
+        this.stkStrBeers.push(strBeer);
     }
     /**
      * Get the last beer inserted on the container
-     * @return Beer's Counter
+     * @return Last inserted Beer
      */
-    public synchronized int getBeer(){
-        // Less one to the container
-        this.iBeers = this.iBeers - 1;
-        // Return this beers. 
-        // Why I do plus one to the container? 
-        // Because if I return the current beer's counter 
-        // I would be passing the incorrect beer.
-        return this.iBeers + 1;
+    public synchronized String getBeer(){
+        // Return this beers the last inserted beer
+        return this.stkStrBeers.pop();
     }    
+    /**
+     * Check if the stack of beer has been emptied
+     * @return True|False
+     */
+    public Boolean isEmtpy(){
+        // Check the status of the stack (Empty or not)
+        return this.stkStrBeers.empty();
+    }
 }

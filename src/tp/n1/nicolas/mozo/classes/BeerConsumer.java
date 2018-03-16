@@ -28,9 +28,9 @@ public class BeerConsumer implements Runnable{
     @Override
     public void run() {
         // Unlimited time
-        while(this.tBeerHouse.getBeer() > 0){
+        while(!this.tBeerHouse.isEmtpy()){
             // Nothing..
-            System.out.println("Una birrita para nuestro amigo con el ID: " + this.iConsumerID);
+            System.out.println("Una " + this.tBeerHouse.getBeer() + " para nuestro amigo con el ID: " + this.iConsumerID);
         } 
         // Send an elocuent message to the user
         // saying that there aren't more beers
