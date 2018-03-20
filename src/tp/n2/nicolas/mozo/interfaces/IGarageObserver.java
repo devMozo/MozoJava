@@ -10,9 +10,9 @@ package tp.n2.nicolas.mozo.interfaces;
  * @author Mozo
  * Observer's Pattern
  */
-public interface IBeerObserver {
+public interface IGarageObserver {
     /**
      *  Method to update
      */
-    public void update();
+    public void update(Object o);
 }

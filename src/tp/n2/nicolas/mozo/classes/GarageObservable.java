@@ -7,43 +7,43 @@ package tp.n2.nicolas.mozo.classes;
 
 import java.util.ArrayList;
 import java.util.Observer;
-import tp.n2.nicolas.mozo.interfaces.IBeerObservable;
-import tp.n2.nicolas.mozo.interfaces.IBeerObserver;
+import tp.n2.nicolas.mozo.interfaces.IGarageObservable;
+import tp.n2.nicolas.mozo.interfaces.IGarageObserver;
 
 /**
  *
  * @author Mozo
  */
-public class BeerObservable implements IBeerObservable{
+public class GarageObservable implements IGarageObservable{
     // Array that will contain all observers
-    private static ArrayList<IBeerObserver> arrObservers = new ArrayList();
+    private static ArrayList<IGarageObserver> arrObservers = new ArrayList();
     /**
      * Attach a new observer to the static array
      * @param tObserver 
      */
     @Override
-    public void attach(IBeerObserver tObserver) {
+    public void attach(IGarageObserver tObserver) {
         // Add
-        BeerObservable.arrObservers.add(tObserver);
+        GarageObservable.arrObservers.add(tObserver);
     }
     /**
      * Deattach an observer from the static array
      * @param tObserver 
      */
     @Override
-    public void deattach(IBeerObserver tObserver) {
+    public void deattach(IGarageObserver tObserver) {
         // Remove
-        BeerObservable.arrObservers.remove(tObserver);
+        GarageObservable.arrObservers.remove(tObserver);
     }
     /**
      * Notify to all observers
      */
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(Object o) {
         // Loop over all observers
-        for(int i = 0; i < BeerObservable.arrObservers.size(); i++){
+        for(int i = 0; i < GarageObservable.arrObservers.size(); i++){
             // Access to the update method
-            arrObservers.get(i).update();
+            arrObservers.get(i).update(o);
         }        
     }    
 }
