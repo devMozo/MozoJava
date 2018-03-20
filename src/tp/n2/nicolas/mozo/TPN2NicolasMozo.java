@@ -26,9 +26,9 @@ public class TPN2NicolasMozo {
         GarageObservable tBeerObservable = new GarageObservable();
         // Attach observers
         tBeerObservable.attach(new Mechanic());
-        
+        // New Car's Model
         Car tCar = new Car(tBeerObservable);
-        
+        // Set some data to the car
         tCar.setFltWheelPresion((float) 0.1234);
         tCar.setiNumDoors(123);
         tCar.setiOilLevel(12);
