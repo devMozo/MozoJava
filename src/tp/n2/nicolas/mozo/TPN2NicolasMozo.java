@@ -8,6 +8,7 @@ package tp.n2.nicolas.mozo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import tp.n2.nicolas.mozo.classes.Car;
+import tp.n2.nicolas.mozo.classes.CarMechanic;
 import tp.n2.nicolas.mozo.classes.GarageObservable;
 import tp.n2.nicolas.mozo.classes.Mechanic;
 
@@ -25,10 +26,11 @@ public class TPN2NicolasMozo {
         // New observable
         GarageObservable tBeerObservable = new GarageObservable();
         // Attach observers
-        tBeerObservable.attach(new Mechanic());
+        tBeerObservable.attach(new CarMechanic());
         // New Car's Model
         Car tCar = new Car(tBeerObservable);
         // Set some data to the car
+        tCar.setiID(13);
         tCar.setFltWheelPresion((float) 0.1234);
         tCar.setiNumDoors(123);
         tCar.setiOilLevel(12);

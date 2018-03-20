@@ -5,6 +5,8 @@
  */
 package tp.n2.nicolas.mozo.interfaces;
 
+import tp.n2.nicolas.mozo.classes.Car;
+
 /**
  *
  * @author Mozo

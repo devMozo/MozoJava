@@ -9,13 +9,10 @@ import tp.n2.nicolas.mozo.interfaces.IGarageObserver;
 
 /**
  *
- * @author Yo
+ * @author Mozo
  */
-public class Mechanic implements IGarageObserver{
-
+public abstract class Mechanic implements IGarageObserver{
+    // Empty function     
     @Override
-    public void update(Object o) {
-        System.out.println(o.toString());
-    }
-    
+    public void update(Object o){}
 }

@@ -11,6 +11,7 @@ package tp.n2.nicolas.mozo.classes;
  */
 public class Car{
     // Attributes
+    private int iID = 0;
     private int iNumDoors = 0;
     private int iOilLevel = 0;
     private int iWaterLevel = 0;
@@ -25,6 +26,9 @@ public class Car{
         this.tGarage = tGarage;
     }   
     // Getters
+    public int getiID() {
+        return iID;
+    }    
     public int getiNumDoors() {
         return iNumDoors;
     }
@@ -41,6 +45,11 @@ public class Car{
         return strCarName;
     }
     // Setters
+    public void setiID(int iID) {
+        this.iID = iID;
+        // Trigger an event saying that the states has been modified
+        this.tGarage.notifyObservers(this);
+    }    
     public void setiNumDoors(int iNumDoors) {
         this.iNumDoors = iNumDoors;
         // Trigger an event saying that the states has been modified
@@ -74,6 +83,7 @@ public class Car{
     public String toString() {
         // Custom string
         return "--------------- Car Changed ---------------" +
+               "\nID: " + this.iID +
                "\nNumber of Doors: " + this.iNumDoors +
                "\nOil Level: " + this.iOilLevel +
                "\nWater Level: " + this.iWaterLevel +
