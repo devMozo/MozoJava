@@ -48,7 +48,7 @@ var tThread = new Thread (new ObjectWithRunnable ());
 
 var tThread = new Thread (new ObjectWithRunnable (), "AltoThread");
 
-##日本語の質問：
+## 日本語の質問：
 
 1）**生産者よりも多くの消費者**がある場合は0を取ることができますが、消費者と生産者は同じ数量で**異なる作業時間で**これを行うことができます。**
 
