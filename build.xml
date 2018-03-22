@@ -8,7 +8,7 @@
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
 <project name="TP_N3_-_Nicolas_Mozo" default="default" basedir=".">
-    <description>Builds, tests, and runs the project TP N3 - Nicolas Mozo.</description>
+    <description>Builds, tests, and runs the project TP_N3_-_Nicolas_Mozo.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
