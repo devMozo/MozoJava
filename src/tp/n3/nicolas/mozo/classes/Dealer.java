@@ -63,7 +63,7 @@ public class Dealer extends Person{
                 // Get a new card from the deck
                 oCardToPut = this.stkCards.getCard();
                 // Animation
-                System.out.println("\nThe dealer puts: " + oCardToPut.toString() + "\n");
+                System.out.println("The dealer puts: " + oCardToPut.toString() + "\n");
                 // Put the card on the table
                 oCurrentGameTable.setoCurrentCard(oCardToPut);
                 // If we have no more cards inside the deck
@@ -73,7 +73,7 @@ public class Dealer extends Person{
                     // Emit an event
                     oCurrentGameTable.notifyObservers(this);
                 }
-            }            
+            }
         }       
     }
     
