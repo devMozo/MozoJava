@@ -32,7 +32,7 @@ public class TPN3NicolasMozo {
         game.addPlayer(betty);
         game.addPlayer(manu);
         
-        new Thread(game).start();
+        game.startGame();
     }
     
 }

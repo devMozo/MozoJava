@@ -39,6 +39,13 @@ public class Player extends Person{
         this.stkMyHand = stkHand;
     }
     /**
+     * Get the cards that has in the hand
+     * @return 
+     */
+    public Stack<Card> getStkMyHand() {
+        return stkMyHand;
+    }   
+    /**
      * Add a card to the Player's Hand
      * @param oCard 
      */
@@ -71,7 +78,6 @@ public class Player extends Person{
      * @return 
      */
     public int getPositionOfTheCard(Card oCard){
-        System.out.println(oCard.toString());
         // By default the response is false
         int iResponse = -1;
         // Loop over all array
@@ -90,8 +96,6 @@ public class Player extends Person{
      */
     @Override
     public void run() {
-        // Show to the audience wich card we have
-        System.out.println(this.getStrName() + "'s Cards:" + this.stkMyHand.toString());
         // To not create a lot of variables in memory inside the while loop
         // I create and initialize whit null this objects
         GameTable oCurrentGameTable = null;
@@ -103,36 +107,72 @@ public class Player extends Person{
             // Syncronized block
             synchronized(this){
                 // Get the current card
-                oCardToGet = oCurrentGameTable.getoCurrentCard();
+                oCardToGet = oCurrentGameTable.peekStkCards();
                 // Do I have the card? Fast!! If you take much time another player
                 // can steal it!!
                 if(oCardToGet != null && this.hasTheCardInMyHand(oCardToGet)){
                     // I get the card again 
-                    oCardToGet = oCurrentGameTable.getoCurrentCard();
-                    // The card is only for you :D
-                    oCurrentGameTable.emptyCard();                           
+                    oCardToGet = oCurrentGameTable.popStkCards();                         
                     // If there's not a card on the table
                     if(oCardToGet != null){
-                        // Animation
-                        System.out.println("The player "+ this.getStrName() +" gets: " + oCardToGet.toString());
-                        // Remove the getted card from my hand
-                        this.stkMyHand.remove(this.getPositionOfTheCard(oCardToGet));
-                        System.out.println("Now he has: " + this.stkMyHand.toString() + "\n");
-                        // If we have no more cards inside the deck
-                        if(this.stkMyHand.size() <= 0){
-                            // Finish the while loop
-                            this.bHasFinished = true;
-                            // Emit an event
-                            oCurrentGameTable.notifyObservers(this);
+                        // Get the position of the card
+                        int iPositionCard = this.getPositionOfTheCard(oCardToGet);
+                        // If is a valid integer
+                        if(iPositionCard >= 0){
+                            // Remove the getted card from my hand
+                            this.stkMyHand.remove(iPositionCard);
+                            // If we have no more cards inside the deck
+                            if(this.stkMyHand.size() <= 0){
+                                // Finish the while loop
+                                this.bHasFinished = true;                            
+                                // A changes has been produced
+                                oCurrentGameTable.setChanged();
+                                // Emit an event
+                                oCurrentGameTable.notifyObservers(this);
+                                // Show the winner
+                                System.out.println("And the winner is... " + this.getStrName() + " and the finished result is: \n");
+                            }
                         }
                     }
                 } 
             }
-        }      
+        }     
     }     
-
+    /**
+     * On update is fired
+     * @param o
+     * @param arg 
+     */
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // If the arg is an event
+        if(arg instanceof GameEvents){
+            // Get the current table
+            GameTable oCurrentGameTable = this.getoGameTable();
+            // Create the response
+            GameEvents evtResponse = new GameEvents(((GameEvents) arg).getStrCode() + "RESPONSE", null);
+            // Do we need to notify to someone?
+            boolean bNotify = false;
+            // What events did it send?
+            switch(((GameEvents) arg).getStrCode()){
+                case "CHECKSTATUSPLAYER":
+                    // Send my hand :O
+                    evtResponse.setoObject(this);
+                    // Notify true
+                    bNotify = true;
+                break;
+            }
+            // If we need to notify
+            if(bNotify){
+                // A changes has been produced
+                oCurrentGameTable.setChanged();
+                // Emit an event
+                oCurrentGameTable.notifyObservers(evtResponse);
+            }
+        }
+        // IF is a direct message from the dealer
+        if(arg instanceof Dealer){
+            this.bHasFinished = true;   
+        }      
     }
 }

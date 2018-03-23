@@ -38,6 +38,13 @@ public class CardsDeck{
         return this.stkDeck.size();
     }
     /**
+     * Set a new deck
+     * @param stkDeck
+     */
+    protected void setNewDeck(Stack<Card> stkDeck){
+        this.stkDeck.addAll(this.mixCards(stkDeck));
+    }
+    /**
      * Push a discarded card to the correct deck
      * @param oCard
      */
