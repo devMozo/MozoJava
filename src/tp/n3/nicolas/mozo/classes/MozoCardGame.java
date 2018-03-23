@@ -130,7 +130,6 @@ public class MozoCardGame implements Observer{
             for(int i = 1; i < this.arrPlayers.size(); i++){
                 strPlayer += ",(" + this.idGame + "," + this.arrPlayers.get(i).getId() + ", " + this.arrPlayers.get(i).getiPoints() + ")";
             }
-            System.out.println(strPlayer);
             // Now we are gonna the save all players that were in the game
             strQuery = "INSERT INTO games_players(id_game, id_player, points) VALUES " + strPlayer;
             // Prepare the query
