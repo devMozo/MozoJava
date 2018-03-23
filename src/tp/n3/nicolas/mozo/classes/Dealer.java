@@ -6,6 +6,8 @@
 package tp.n3.nicolas.mozo.classes;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Observable;
@@ -162,9 +164,16 @@ public class Dealer extends Person{
         Connection oConnection = oGameMySQL.getoConnect();
         // Query to save the dealer        
         String strQuery = "INSERT INTO dealers(id_people) VALUES(" + this.getId() + ")";
-        // New statement
-        Statement oStatement = oConnection.createStatement();
-        // Execute the query to insert
-        this.setId(oStatement.executeUpdate(strQuery, Statement.RETURN_GENERATED_KEYS));       
+        // Prepare the query and say that it'll need to save the inserted id
+        PreparedStatement oPreparedStatement = oConnection.prepareStatement(strQuery, Statement.RETURN_GENERATED_KEYS);
+        // Execute query           
+        oPreparedStatement.executeUpdate();
+        // Get the gerated keys
+        ResultSet oResultSet = oPreparedStatement.getGeneratedKeys();
+        // If there's something
+        if(oResultSet.next()){
+            // Set the id
+            this.setId(oResultSet.getInt(1));
+        } 
     } 
 }
