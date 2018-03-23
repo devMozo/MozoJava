@@ -5,6 +5,9 @@
  */
 package tp.n3.nicolas.mozo.classes;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Observable;
 import java.util.Stack;
 import java.util.logging.Level;
@@ -19,25 +22,23 @@ public class Dealer extends Person{
     private CardsDeck stkCards;
     /**
      * Class's Constructor
-     * @param strName
-     * @param id 
+     * @param strName 
      * @throws java.lang.Exception 
      */
-    public Dealer(String strName, int id) throws Exception {
+    public Dealer(String strName) throws Exception {
         // Call to the parent class
-        super(strName, id);
+        super(strName);
         // Initialize the cards' deck
         this.stkCards = new CardsDeck();
     }
     /**
      * Class's Overload Constructor
      * @param strName
-     * @param id
      * @param stkCards 
      */
-    public Dealer(String strName, int id, CardsDeck stkCards){
+    public Dealer(String strName, CardsDeck stkCards){
         // Call to the parent class
-        super(strName, id);
+        super(strName);
         // Initialize the cards' deck
         this.stkCards = stkCards;
     }
@@ -144,4 +145,26 @@ public class Dealer extends Person{
             this.bHasFinished = true;            
         }  
     }
+    /**
+     * Override the method to save inside the DB
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
+    @Override
+    public void save() throws ClassNotFoundException, SQLException {
+        // Call the parent class
+        super.save(); 
+        // New Game's MySQl
+        GameMySQL oGameMySQL = new GameMySQL();
+        // Connect to the DB
+        oGameMySQL.connect();
+        // Get the connction's object
+        Connection oConnection = oGameMySQL.getoConnect();
+        // Query to save the dealer        
+        String strQuery = "INSERT INTO dealers(id_people) VALUES(" + this.getId() + ")";
+        // New statement
+        Statement oStatement = oConnection.createStatement();
+        // Execute the query to insert
+        this.setId(oStatement.executeUpdate(strQuery, Statement.RETURN_GENERATED_KEYS));       
+    } 
 }

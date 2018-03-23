@@ -5,6 +5,9 @@
  */
 package tp.n3.nicolas.mozo.classes;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Observable;
 import java.util.Stack;
 /**
@@ -15,29 +18,42 @@ public class Player extends Person{
     // Attributes
     private Stack<Card> stkMyHand;
     private String strState = "";
+    private int iPoints = 0;
     /**
      * Class's Constructor
-     * @param strName
-     * @param id 
+     * @param strName 
      */
-    public Player(String strName, int id) {
+    public Player(String strName) {
         // Call to the parent class
-        super(strName, id);
+        super(strName);
         // Set the hand
         this.stkMyHand = new Stack();
     }
     /**
      * Class's Overloaded Constructor
-     * @param strName
-     * @param id 
+     * @param strName 
      * @param stkHand 
      */
-    public Player(String strName, int id, Stack<Card> stkHand) {
+    public Player(String strName, Stack<Card> stkHand) {
         // Call to the parent class
-        super(strName, id);
+        super(strName);
         // Set the hand
         this.stkMyHand = stkHand;
     }
+    /**
+     * Get made points
+     * @return int
+     */
+    public int getiPoints() {
+        return iPoints;
+    }
+    /**
+     * Set how many point did he make?
+     * @param iPoints 
+     */
+    public void setiPoints(int iPoints) {
+        this.iPoints = iPoints;
+    }    
     /**
      * Get the cards that has in the hand
      * @return 
@@ -175,4 +191,26 @@ public class Player extends Person{
             this.bHasFinished = true;   
         }      
     }
+    /**
+     * Override the method to save inside the DB
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
+    @Override
+    public void save() throws ClassNotFoundException, SQLException {
+        // Call the parent class
+        super.save(); 
+        // New Game's MySQl
+        GameMySQL oGameMySQL = new GameMySQL();
+        // Connect to the DB
+        oGameMySQL.connect();
+        // Get the connction's object
+        Connection oConnection = oGameMySQL.getoConnect();
+        // Query to save the player        
+        String strQuery = "INSERT INTO players(id_people) VALUES(" + this.getId() + ")";
+        // New statement
+        Statement oStatement = oConnection.createStatement();
+        // Execute the query to insert
+        this.setId(oStatement.executeUpdate(strQuery, Statement.RETURN_GENERATED_KEYS));       
+    }    
 }

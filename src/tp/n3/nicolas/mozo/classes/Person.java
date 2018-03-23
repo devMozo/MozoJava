@@ -5,6 +5,11 @@
  */
 package tp.n3.nicolas.mozo.classes;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Observer;
 
 /**
@@ -14,24 +19,22 @@ import java.util.Observer;
 public abstract class Person implements Runnable, Observer{
     // Attributes
     private String strName = "";
-    private int id = 0;
+    private int iID = 0;
     private GameTable oGameTable;
     protected boolean bHasFinished = false;
     /**
      * Class's COnstructor
      * @param strName
-     * @param id
      */
-    public Person(String strName, int id) {
+    public Person(String strName) {
         this.strName = strName;
-        this.id = id;
     }
     // Getters
     public String getStrName() {
         return strName;
     }
     public int getId() {
-        return id;
+        return iID;
     }
     public GameTable getoGameTable() {
         return oGameTable;
@@ -41,9 +44,35 @@ public abstract class Person implements Runnable, Observer{
         this.strName = strName;
     }
     public void setId(int id) {
-        this.id = id;
+        this.iID = id;
     }
     public void setoGameTable(GameTable oGameTable) {
         this.oGameTable = oGameTable;
     }    
+    /**
+     * Save the person on the DB 
+     * @throws java.lang.ClassNotFoundException 
+     * @throws java.sql.SQLException 
+     */
+    public synchronized void save() throws ClassNotFoundException, SQLException{
+        // New Game's MySQl
+        GameMySQL oGameMySQL = new GameMySQL();
+        // Connect to the DB
+        oGameMySQL.connect();
+        // Get the connction's object
+        Connection oConnection = oGameMySQL.getoConnect();
+        // Query to save the person        
+        String strQuery = "INSERT INTO people(name) VALUES('" + this.strName + "')";
+        // Prepare the query and say that it'll need to save the inserted id
+        PreparedStatement oPreparedStatement = oConnection.prepareStatement(strQuery, Statement.RETURN_GENERATED_KEYS);
+        // Execute query           
+        oPreparedStatement.executeUpdate();
+        // Get the gerated keys
+        ResultSet oResultSet = oPreparedStatement.getGeneratedKeys();
+        // If there's something
+        if(oResultSet.next()){
+            // Set the id
+            this.iID = oResultSet.getInt(1);
+        }  
+    }
 }

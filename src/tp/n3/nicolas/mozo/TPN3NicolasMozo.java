@@ -19,13 +19,21 @@ public class TPN3NicolasMozo {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // TODO code application logic here
-        MozoCardGame game = new MozoCardGame(new Dealer("Leandro", 1));
         
-        Player jorge = new Player("Jorge", 4);        
-        Player ale = new Player("Alenjandra", 6);
-        Player betty = new Player("Beatriz", 8);
-        Player manu = new Player("Manuel", 12);
+        Dealer oDealer = new Dealer("Leandro");
+        oDealer.save();
+        
+        // TODO code application logic here
+        MozoCardGame game = new MozoCardGame(oDealer);
+        
+        Player jorge = new Player("Jorge");
+        jorge.save();
+        Player ale = new Player("Alenjandra");
+        ale.save();
+        Player betty = new Player("Beatriz");
+        betty.save();
+        Player manu = new Player("Manuel");
+        manu.save();       
 
         game.addPlayer(jorge);        
         game.addPlayer(ale);
