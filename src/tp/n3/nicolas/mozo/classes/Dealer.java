@@ -91,7 +91,7 @@ public class Dealer extends Person{
                     // Emit an event
                     oCurrentGameTable.notifyObservers(this);
                     // Show a message saying that was a tie
-                    System.out.println("Tie!!!");
+                    System.out.println("\n No winners, it's a tie!!!\n");
                 } else {
                     // Show a message that the deck is mixing..
                     System.out.println("\nMIXING...\n");

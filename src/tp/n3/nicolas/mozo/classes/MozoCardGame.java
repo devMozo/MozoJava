@@ -18,7 +18,7 @@ public class MozoCardGame{
     private ArrayList<Player> arrPlayers = new ArrayList();
     private GameTable oGameTable = new GameTable();
     
-    public static final int MAXIMUN_CARD_PER_PLAYER = 5;
+    public static final int MAXIMUN_CARD_PER_PLAYER = 3;
     public static final int MAXIMUN_MIXING_PER_GAME = 2;
     /**
      * Class's Contructor

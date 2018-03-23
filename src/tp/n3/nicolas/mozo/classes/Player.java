@@ -171,7 +171,7 @@ public class Player extends Person{
             }
         }
         // IF is a direct message from the dealer
-        if(arg instanceof Dealer){
+        if(arg instanceof Dealer || arg instanceof Player){
             this.bHasFinished = true;   
         }      
     }
