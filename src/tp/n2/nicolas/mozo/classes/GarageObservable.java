@@ -6,7 +6,6 @@
 package tp.n2.nicolas.mozo.classes;
 
 import java.util.ArrayList;
-import java.util.Observer;
 import tp.n2.nicolas.mozo.interfaces.IGarageObservable;
 import tp.n2.nicolas.mozo.interfaces.IGarageObserver;
 
@@ -37,6 +36,7 @@ public class GarageObservable implements IGarageObservable{
     }
     /**
      * Notify to all observers
+     * @param o
      */
     @Override
     public void notifyObservers(Object o) {

@@ -5,8 +5,6 @@
  */
 package tp.n2.nicolas.mozo.interfaces;
 
-import tp.n2.nicolas.mozo.classes.Car;
-
 /**
  *
  * @author Mozo
@@ -15,6 +13,7 @@ import tp.n2.nicolas.mozo.classes.Car;
 public interface IGarageObserver {
     /**
      *  Method to update
+     * @param o
      */
     public void update(Object o);
 }

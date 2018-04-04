@@ -19,6 +19,7 @@ public class CarMechanic extends Mechanic{
      * Update the Cars' Array
      * @param o 
      */
+    @Override
     public void update(Object o) {
         // Check that the object is a car
         if(o instanceof Car){
