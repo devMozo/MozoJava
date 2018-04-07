@@ -1,4 +1,4 @@
-package com.mozo.tp4.TP4MozoNicolas;
+package com.mozo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

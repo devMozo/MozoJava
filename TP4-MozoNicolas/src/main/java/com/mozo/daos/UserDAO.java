@@ -2,6 +2,8 @@ package com.mozo.daos;
 
 import com.mozo.models.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,7 +12,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-@Repository
+@Transactional
+@Service
 public class UserDAO implements iUserDAO{
 
     @PersistenceContext
