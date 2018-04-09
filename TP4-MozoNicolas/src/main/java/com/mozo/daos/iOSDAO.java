@@ -1,14 +1,9 @@
 package com.mozo.daos;
 
-import com.mozo.models.User;
+import com.mozo.models.OS;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-/**
- * UserService's Interface
- */
 @Transactional
-public interface iUserDAO extends CrudRepository<User, Long> {
-
+public interface iOSDAO extends CrudRepository<OS, Long> {
 }
