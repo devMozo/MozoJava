@@ -76,10 +76,14 @@ We cannot switch this annotation with any other like @Service or @Repository, ev
 #### Verbs
 
 **GET:** Use GET requests to retrieve resource representation/information only – and not to modify it in any way. As GET requests do not change the state of resource, these are said to be safe methods. Additionally, GET APIs should be idempotent, which means that making multiple identical requests must produce same result everytime until another API (POST or PUT) has changed the state of resource on server.
+
 **POST:** Use POST APIs to create new subordinate resources, e.g. a file is subordinate to a directory containing it or a row is subordinate to a database table. Talking strictly in terms of REST, POST methods are used to create a new resource into the collection of resources.
+
 **PUT:** Use PUT APIs primarily to update existing resource (if resource does not exist then API may decide to create a new resource or not). If a new resource has been created by the PUT API, the origin server MUST inform the user agent via the HTTP response code 201 (Created) response and if an existing resource is modified, either the 200 (OK) or 204 (No Content) response codes SHOULD be sent to indicate successful completion of the request.
+
 **DELETE:** As the name applies, DELETE APIs are used to delete resources (identified by the Request-URI).
 A successful response of DELETE requests SHOULD be HTTP response code 200 (OK) if the response includes an entity describing the status, 202 (Accepted) if the action has been queued, or 204 (No Content) if the action has been performed but the response does not include an entity.
+
 **PATCH:** HTTP PATCH requests are to make partial update on a resource. If you see PUT requests also modify a resource entity so to make more clear – PATCH method is the correct choice for partially updating an existing resource and PUT should only be used if you’re replacing a resource in it’s entirety.  
 
 ## Preguntas en Español:
@@ -158,10 +162,14 @@ No podemos cambiar esta anotación por ninguna otra como @Service o @Repository,
 #### Verbos
 
 ** GET: ** Utilice las solicitudes GET para recuperar la representación / información de recursos únicamente, y no para modificarla de ninguna manera. Como las solicitudes GET no cambian el estado del recurso, se dice que son métodos seguros. Además, las API GET deben ser idempotentes, lo que significa que al hacer varias solicitudes idénticas debe producir el mismo resultado cada vez hasta que otra API (POST o PUT) haya cambiado el estado del recurso en el servidor.
+
 ** POST: ** Use API POST para crear nuevos recursos subordinados, p. un archivo está subordinado a un directorio que lo contiene o una fila está subordinada a una tabla de base de datos. Hablando estrictamente en términos de REST, los métodos POST se usan para crear un nuevo recurso en la colección de recursos.
+
 ** PUT: ** Use las API de PUT principalmente para actualizar el recurso existente (si el recurso no existe, la API puede decidir crear un nuevo recurso o no). Si la API PUT ha creado un nuevo recurso, el servidor de origen DEBE informar al agente de usuario mediante la respuesta del código de respuesta HTTP 201 (Creado) y si se modifica un recurso existente, el 200 (OK) o el 204 (Sin contenido) los códigos de respuesta DEBEN enviarse para indicar la finalización exitosa de la solicitud.
+
 ** DELETE: ** A medida que se aplica el nombre, las API DELETE se utilizan para eliminar recursos (identificados por Request-URI).
 Una respuesta exitosa de las solicitudes DELETE DEBERÍA ser el código de respuesta HTTP 200 (OK) si la respuesta incluye una entidad que describe el estado, 202 (Aceptado) si la acción se ha puesto en cola, o 204 (Sin contenido) si la acción se ha realizado pero el la respuesta no incluye una entidad.
+
 ** PATCH: ** Las solicitudes HTTP PATCH consisten en realizar una actualización parcial de un recurso. Si ve solicitudes PUT, también modifique una entidad de recursos para que quede más claro: el método PATCH es la opción correcta para actualizar parcialmente un recurso existente y PUT solo debe usarse si está reemplazando un recurso en su totalidad.
 
 ## 日本語の質問：
@@ -238,8 +246,12 @@ Una respuesta exitosa de las solicitudes DELETE DEBERÍA ser el código de respu
 #### 動詞
 
 ** GET：** GETリクエストを使用して、リソース表現/情報のみを取得します。何も変更しません。 GETリクエストはリソースの状態を変更しないので、これは安全な方法と言われています。さらに、GET APIは冪等でなければなりません。つまり、複数の同一のリクエストを作成すると、別のAPI（POSTまたはPUT）がサーバー上のリソースの状態を変更するまで毎回同じ結果を生成する必要があります。
+
 ** POST：** POST APIを使用して、新しい従属リソースを作成します。ファイルはそれを含むディレクトリに従属するか、または行はデータベーステーブルの従属です。厳密にはRESTの観点から言えば、POSTメソッドはリソースのコレクションに新しいリソースを作成するために使用されます。
+
 ** PUT：** PUT APIを主に使用して既存のリソースを更新します（リソースが存在しない場合、APIは新しいリソースを作成するかどうかを決定する可能性があります）。新しいリソースがPUT APIによって作成された場合、元のサーバーはHTTP応答コード201（作成済み）応答を介してユーザーエージェントに通知しなければならず、既存のリソースが変更された場合、200（OK）または204応答コードは要求の正常終了を示すために送信されるべきです（SHOULD）。
+
 ** DELETE：**名前が適用されると、DELETE APIはリソース（Request-URIによって識別される）を削除するために使用されます。
 DELETE要求の成功応答は、レスポンスにステータスを記述するエンティティが含まれる場合はHTTP応答コード200（OK）、アクションがキューに入れられている場合は202（Accepted）、アクションが実行された場合は204（No Content）応答にはエンティティは含まれません。
+
 ** PATCH：** HTTP PATCHリクエストは、リソースに対して部分的な更新を行うことです。 PUTリクエストが表示されている場合は、リソースエンティティを変更してより明確にしてください。PATCHメソッドは既存のリソースを部分的に更新するための正しい選択です。PUTはリソースを完全に置き換える場合にのみ使用してください。
