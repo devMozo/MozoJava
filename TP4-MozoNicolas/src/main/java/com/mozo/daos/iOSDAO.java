@@ -1,9 +1,10 @@
 package com.mozo.daos;
 
 import com.mozo.models.OS;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Transactional
-public interface iOSDAO extends CrudRepository<OS, Long> {
+@Repository
+public interface iOSDAO extends JpaRepository<OS, Long> {
+    OS findOneByName(String name);
 }
